@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-A single-file, browser-based high-frequency sound level meter (`splmeter.html`). It captures microphone input via the Web Audio API and displays the real-time and peak level (relative dBFS, not calibrated SPL) at a selected target frequency (19 kHz or 21 kHz). UI text and code comments are in Japanese.
+A single-file, browser-based high-frequency sound level meter (`index.html`). It captures microphone input via the Web Audio API and displays the real-time and peak level (relative dBFS, not calibrated SPL) at a selected target frequency (19 kHz or 21 kHz). UI text and code comments are in Japanese.
 
 There is no build system, package manager, linter, or test suite — HTML, CSS, and JS are all inline in one file with no external dependencies.
 
@@ -12,13 +12,15 @@ There is no build system, package manager, linter, or test suite — HTML, CSS, 
 
 `getUserMedia` requires a secure context, so open the page via `localhost` or HTTPS (not `file://` on most mobile browsers):
 
-- **VS Code Live Server** (ritwickdey, installed on the WSL side): click "Go Live", then open `http://127.0.0.1:5500/splmeter.html` in a Windows browser.
+- **VS Code Live Server** (ritwickdey, installed on the WSL side): click "Go Live", then open `http://127.0.0.1:5500/` in a Windows browser.
 - **Without VS Code**:
   ```sh
-  python3 -m http.server 8000   # then open http://localhost:8000/splmeter.html
+  python3 -m http.server 8000   # then open http://localhost:8000/
   ```
 
 Development happens in WSL2. WSL2 forwards ports to Windows `localhost`, so a Windows browser treats the page as a secure context and uses the Windows microphone — no mic setup is needed inside WSL. Use an external browser; VS Code's built-in preview panes (e.g. Live Preview) likely cannot get mic permission.
+
+The site is published via GitHub Pages (repo `tntetsu/SPLmeter`, branch `main`, root) at https://tntetsu.github.io/SPLmeter/ — pushing to `main` deploys it, and HTTPS there makes it usable on phones.
 
 To test on a phone over the LAN, the page must be served over HTTPS, and WSL2 is not reachable from the LAN by default (needs Windows port forwarding or WSL mirrored networking).
 
